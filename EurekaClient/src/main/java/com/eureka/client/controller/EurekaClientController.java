@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 @RestController
 public class EurekaClientController {
 
@@ -30,7 +32,8 @@ public class EurekaClientController {
 	private String inventoryServiceUrl;
 
 	@RequestMapping("/inventory/sku/{skuId}")
-	//@Produces(value=MediaType.APPLICATION_JSON)
+	// @Produces(value=MediaType.APPLICATION_JSON)
+	@HystrixCommand(fallbackMethod = "dummy")
 	public String getInventoryDetails(@PathVariable String skuId) {
 
 		String inventoryDetails = null;
@@ -42,8 +45,16 @@ public class EurekaClientController {
 		return inventoryDetails;
 	}
 
+	public String inventoryFallback(String skuId) {
+
+		String dummyOutput = "{'sku':" + skuId + "},{'inventory':0}";
+
+		return dummyOutput;
+	}
+
 	@RequestMapping("/price/sku/{skuId}")
-	@Produces(value=MediaType.APPLICATION_JSON)
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@HystrixCommand(fallbackMethod="priceFallback")
 	public String getPriceDetails(@PathVariable String skuId) {
 
 		String priceDetails = null;
@@ -51,8 +62,14 @@ public class EurekaClientController {
 		priceDetails = restTemplate.getForObject(priceServiceUrl + skuId, String.class);
 
 		System.out.println(priceDetails);
-		
+
 		return priceDetails;
 	}
 
+	public String priceFallback(String skuId) {
+
+		String dummyOutput = "{'sku':" + skuId + "},{'price':0}";
+
+		return dummyOutput;
+	}
 }
