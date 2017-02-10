@@ -32,8 +32,7 @@ public class EurekaClientController {
 	private String inventoryServiceUrl;
 
 	@RequestMapping("/inventory/sku/{skuId}")
-	// @Produces(value=MediaType.APPLICATION_JSON)
-	@HystrixCommand(fallbackMethod = "dummy")
+	@HystrixCommand(fallbackMethod = "inventoryFallback")
 	public String getInventoryDetails(@PathVariable String skuId) {
 
 		String inventoryDetails = null;

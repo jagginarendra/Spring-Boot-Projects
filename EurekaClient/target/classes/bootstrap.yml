@@ -1,6 +1,6 @@
 spring:
   application:
-    name: CatlogEntryEntryEurekaClient
+    name: CatlogEntryEurekaClient
   cloud:
     loadbalancer:
       retry:

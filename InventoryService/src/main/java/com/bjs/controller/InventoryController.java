@@ -1,7 +1,6 @@
 package com.bjs.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bjs.model.Inventory;
 import com.bjs.service.InventoryService;
 
+@SuppressWarnings("unused")
 @RestController
 public class InventoryController {
 
