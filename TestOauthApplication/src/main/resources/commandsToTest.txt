@@ -1,0 +1,24 @@
+
+#Get token first time
+
+command - curl -H  "Accept: application/json" my-client-with-secret:secret@localhost:8080/oauth/token -d grant_type=password -d username=user -d password=password
+response - {"access_token":"67de498b-9fc5-475e-ac29-39312e6d307b","token_type":"bearer","refresh_token":"ef6f6317-c6a9-4c44-887b-93dcce681b84","expires_in":30,"scope":"read","customInfo":"some_stuff_here"}
+  
+#Use token to get resource
+command - curl -H "Authorization: Bearer 67de498b-9fc5-475e-ac29-39312e6d307b" localhost:8080/
+response - Hello World
+
+#use same token again after expiration time
+command - curl -H "Authorization: Bearer 67de498b-9fc5-475e-ac29-39312e6d307b" localhost:8080/
+response - {"error":"invalid_token","error_description":"Access token expired: 67de498b-9fc5-475e-ac29-39312e6d307b"}
+
+
+#time to use the refresh token to get new access_token
+command - curl my-client-with-secret:secret@localhost:8080/oauth/token -d grant_type=refresh_token -d client_id=my-client-with-secret -d response - refresh_token=ef6f6317-c6a9-4c44-887b-93dcce681b84
+
+response - 
+{"access_token":"e7532835-14aa-4727-8093-240f6c64e712","token_type":"bearer","refresh_token":"ef6f6317-c6a9-4c44-887b-93dcce681b84","expires_in":30,"scope":"read","customInfo":"some_stuff_here"}
+
+#use new token to get the resource
+command - curl -H "Authorization: Bearer e7532835-14aa-4727-8093-240f6c64e712" localhost:8080/
+response - Hello World
