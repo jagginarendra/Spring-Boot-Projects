@@ -17,11 +17,17 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
+	public AuthorizationServerConfiguration() {
+		
+		System.out.println("AuthorizationServerConfiguration()");
+	}
+	
 	@Autowired
 	AuthenticationManager authenticationManager;
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		System.out.println("AuthorizationServerConfiguration configure()");
 		endpoints.authenticationManager(authenticationManager).tokenEnhancer(tokenEnhancer()).tokenStore(tokenStore());
 	}
 
@@ -37,7 +43,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		System.out.println("CLIENT CONFIGURED !!!");
+		
+		System.out.println("OAUTH CLIENT CONFIGURED in AuthorizationServerConfiguration !!!");
+		
 		clients.inMemory().withClient("my-trusted-client")
 		.authorizedGrantTypes("password", "authorization_code",
 				"refresh_token", "implicit")
@@ -52,7 +60,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 		and()
 		.withClient("my-client-with-secret")
 		.authorizedGrantTypes("refresh_token", "password")
-		.authorities("ROLE_CLIENT").scopes("read").resourceIds("sparklr")
+		.authorities("ROLE_CLIENT").scopes("read").resourceIds("sparklr").accessTokenValiditySeconds(65)
 		.secret("secret");
 	}
 

@@ -1,12 +1,14 @@
+server:
+  port: 9005
 management:
   context_path: /admin
 security:
   user:
     password: password
 
-debug: true
+#debug: true
 
-logging:
-  level:
-    org.springframework.web: DEBUG
-    org.springframework.security: DEBUG
+#logging:
+#  level:
+#    org.springframework.web: DEBUG
+#    org.springframework.security: DEBUG

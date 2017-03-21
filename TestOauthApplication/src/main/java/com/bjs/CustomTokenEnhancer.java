@@ -10,12 +10,21 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 
 public class CustomTokenEnhancer implements TokenEnhancer {
 
+	public CustomTokenEnhancer() {
+		System.out.println("CustomTokenEnhancer()");
+	}
+
 	@Override
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 
-		final Map<String, Object> additionalInfo = new HashMap<>();
+		System.out.println("Custom Token Enhancer Initialized");
 
-		additionalInfo.put("customInfo", "some_stuff_here");
+		WCSResponse wcsResponse = (WCSResponse) authentication.getPrincipal();
+		authentication.getOAuth2Request().getRequestParameters();
+
+		final Map<String, Object> additionalInfo = new HashMap<>();
+		
+		additionalInfo.put("wcsResponse", wcsResponse);
 
 		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
 
