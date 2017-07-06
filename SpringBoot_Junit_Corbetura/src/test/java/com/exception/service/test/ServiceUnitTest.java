@@ -28,11 +28,11 @@ public class ServiceUnitTest {
 	@Test
 	public void testRestController() {
 
-		Inventory inventoryResponse = restTemplate.getForObject("/v1/testexception/1101", Inventory.class);
+		Inventory inventoryResponse = restTemplate.getForObject("/v1/testexception/1100", Inventory.class);
 
 		//Inventory inventoryResponse = responseEntity.getBody();
 
-		assertEquals("10.0", inventoryResponse.getInventory().toString());
+		assertEquals("100", inventoryResponse.getInventory().toString());
 	}
 
 }

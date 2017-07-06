@@ -1,0 +1,6 @@
+mvn clean install
+
+mvn sonar:sonar
+
+
+then go to localhost:9000 , and u can see the code coverage
