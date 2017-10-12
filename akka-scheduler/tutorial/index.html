@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <title>Akka-Scheduler by anand-singh</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<section class="main-content">
+    <h1>
+        <a id="akka-scheduler" class="anchor" href="#akka-scheduler" aria-hidden="true"><span
+                class="octicon octicon-link"></span></a>akka-scheduler</h1>
+
+    <p>Schedule sending of messages to actors and execution of tasks</p>
+
+    <p>The approach using schedule is one good approach, although there is a potential for the messages to queue up if
+        the work done on schedule is so great that it might take longer than the scheduled interval. If you want the
+        interval to occur between the end of one iteration and the beginning of the next, then use scheduleOnce.</p>
+
+    <h4>
+        <a id="create-project-using-activator-command" class="anchor" href="#create-project-using-activator-command" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create project using activator command</h4>
+
+    <p>If you have Typesafe Activator, use its command line mode to create a new project from this template.</p>
+
+    <p>Type <code>activator new PROJECTNAME akka-scheduler</code> on the command line. </p>
+
+    <h4>
+        <a id="execute-scala-scheduler" class="anchor" href="#execute-scala-scheduler" aria-hidden="true"><span
+                class="octicon octicon-link"></span></a>Execute Scala Scheduler</h4>
+
+<pre><code>$ ./activator "project akka-scala" run
+</code></pre>
+
+    <h4>
+        <a id="execute-java-scheduler" class="anchor" href="#execute-java-scheduler" aria-hidden="true"><span
+                class="octicon octicon-link"></span></a>Execute Java Scheduler</h4>
+
+<pre><code>$ ./activator "project akka-java" run
+</code></pre>
+
+
+</section>
+
+
+</body>
+</html>
